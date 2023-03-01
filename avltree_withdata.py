@@ -3,6 +3,8 @@ import time
 import os
 class Node:
     def __init__(self, key, data):
+        if not isinstance(key, int) or key <= 0:
+            raise ValueError("Key must be a positive integer")
         self.key = key
         self.data = data if data is not None else []
         self.height = 1
@@ -102,7 +104,34 @@ class BST_Dictionary:
         dot = Digraph(comment="AVL Tree")
         _print_tree(self.root, dot)
         dot.render(os.path.join('trees', fileName),view=True)
+    
+    def keys(self):
+        keys = []
 
+        def recursive_collect(node):
+            if node is None:
+                return
+
+            recursive_collect(node.left)
+            keys.append(node.key)
+            recursive_collect(node.right)
+
+        recursive_collect(self.root)
+        return keys
+    
+    def values(self):
+        data = []
+
+        def recursive_collect(node):
+            if node is None:
+                return
+
+            recursive_collect(node.left)
+            data.append(node.data)
+            recursive_collect(node.right)
+
+        recursive_collect(self.root)
+        return data
 if __name__ == "__main__":
     # Create an instance of the AVL tree
    tree = BST_Dictionary()
@@ -115,7 +144,20 @@ if __name__ == "__main__":
    tree.insert(99, "abc")
    tree.insert(32, ("a", 1, "b"))
    tree.insert(12, "xyz")
+   
+   try:
+    tree.insert(-12, "xyz")
+   except NameError:
+    print(ValueError)
+
+       
+       
+   
    timestr = time.strftime("%Y%m%d-%H%M%S")
-   tree.print_tree(timestr)
+
+   print(tree.keys())
+   print(tree.values())
+
+   #tree.print_tree(timestr)
 
 

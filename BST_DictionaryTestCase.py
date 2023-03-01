@@ -1,4 +1,5 @@
 import unittest
+import pytest
 from  avltree_withdata import BST_Dictionary
 
 class BST_DictionaryTestCase(unittest.TestCase):
@@ -9,14 +10,28 @@ class BST_DictionaryTestCase(unittest.TestCase):
     
     def test_insert_empty_key(self):
         avl = BST_Dictionary()
-        with self.assertRaises(ValueError):
+        with pytest.raises(ValueError):
             avl.insert(None,23)
     
     def test_avl_tree_duplicate_key_insertion(self):
         avl_tree = BST_Dictionary()
         avl_tree.insert(1, 'value1')
-        with self.assertRaises(KeyError):
+        with pytest.raises(KeyError):
              avl_tree.insert(1, 'value2')
+    
+    def test_invalid_key(self):
+        avl = BST_Dictionary()
+        with pytest.raises(ValueError):
+            avl.insert("abc", "value")
+        with pytest.raises(ValueError):
+            avl.insert(0, "value")
+        with pytest.raises(ValueError):
+            avl.insert(-1, "value")
+        with pytest.raises(ValueError):
+            avl.insert("", "")
+
+        
+
 
 
     # def test_insert_multiple_keys(self):

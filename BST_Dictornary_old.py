@@ -50,12 +50,15 @@ class BST:
 		return 1
 	
 	def __setitem__(self, key, newvalue):
-		a=2
+		self.insert(key)
 		
 if __name__ == "__main__":
 	inputFilePath = Path(__file__).with_name('inputPS09.txt')
 	outputFilePath = Path(__file__).with_name('outputPS031.txt')
     
+	tree = BST()
+	tree[0]="ajay"
+	abcd=tree[0]
     #Delete output file if it exists    
 	try:
 		if os.path.exists(outputFilePath):
@@ -81,4 +84,3 @@ if __name__ == "__main__":
 		outputfile.write("Input file is empty. Exiting the program \n")
 		outputfile.close()
 		sys.exit(0)
-		
