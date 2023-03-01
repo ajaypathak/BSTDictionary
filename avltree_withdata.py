@@ -1,4 +1,6 @@
 from graphviz import Digraph
+import time
+import os
 class Node:
     def __init__(self, key, data):
         self.key = key
@@ -82,7 +84,7 @@ class BST_Dictionary:
 
         return _search(self.root, key)
 
-    def print_tree(self):
+    def print_tree(self,fileName):
         def _print_tree(node, dot):
             if node:
                 dot.node(str(node.key), str(node.key) + ": " + str(node.data))
@@ -93,9 +95,13 @@ class BST_Dictionary:
                 _print_tree(node.left, dot)
                 _print_tree(node.right, dot)
 
+        
+        if not os.path.exists('trees'):
+            os.makedirs('trees')
+
         dot = Digraph(comment="AVL Tree")
         _print_tree(self.root, dot)
-        dot.render(view=True)
+        dot.render(os.path.join('trees', fileName),view=True)
 
 if __name__ == "__main__":
     # Create an instance of the AVL tree
@@ -109,6 +115,7 @@ if __name__ == "__main__":
    tree.insert(99, "abc")
    tree.insert(32, ("a", 1, "b"))
    tree.insert(12, "xyz")
-   tree.print_tree()
+   timestr = time.strftime("%Y%m%d-%H%M%S")
+   tree.print_tree(timestr)
 
 
