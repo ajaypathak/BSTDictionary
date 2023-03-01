@@ -7,7 +7,7 @@ class Node:
         self.left = None
         self.right = None
 
-class AVLTree:
+class BST_Dictionary:
     def __init__(self):
         self.root = None
 
@@ -99,7 +99,7 @@ class AVLTree:
 
 if __name__ == "__main__":
     # Create an instance of the AVL tree
-   tree = AVLTree()
+   tree = BST_Dictionary()
 
    # Insert some data into the tree
    tree.insert(2, 20)
