@@ -1,26 +1,26 @@
 import unittest
 import pytest
-from  old_avltree_withdata import BST_Dictionary
+from  BST_Dictionary import BSTDictionary
 
 class BST_DictionaryTestCase(unittest.TestCase):
     def test_insert_single_key(self):
-        avl = BST_Dictionary()
+        avl = BSTDictionary()
         avl.insert(10,20)
         self.assertEqual(avl.root.key, 10)
     
     def test_insert_empty_key(self):
-        avl = BST_Dictionary()
+        avl = BSTDictionary()
         with pytest.raises(ValueError):
             avl.insert(None,23)
     
     def test_avl_tree_duplicate_key_insertion(self):
-        avl_tree = BST_Dictionary()
+        avl_tree = BSTDictionary()
         avl_tree.insert(1, 'value1')
         with pytest.raises(KeyError):
              avl_tree.insert(1, 'value2')
     
     def test_invalid_key(self):
-        avl = BST_Dictionary()
+        avl = BSTDictionary()
         with pytest.raises(ValueError):
             avl.insert("abc", "value")
         with pytest.raises(ValueError):

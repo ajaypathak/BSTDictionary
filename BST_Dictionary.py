@@ -12,7 +12,7 @@ class Node:
         self.left = None
         self.right = None
 
-class BST_Dictionary:
+class BSTDictionary:
     def __init__(self):
         self.root = None
 

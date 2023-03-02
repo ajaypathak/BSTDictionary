@@ -1,9 +1,9 @@
 import random
 import timeit
-from BSTDictionary import BST_Dictionary
+from BST_Dictionary import BSTDictionary
 import numpy
 
-avl = BST_Dictionary()
+avl = BSTDictionary()
 
 # insert 50000 random keys and values into the AVL tree
 

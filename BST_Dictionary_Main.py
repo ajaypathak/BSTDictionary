@@ -1,8 +1,8 @@
-from BSTDictionary import BST_Dictionary
+from BST_Dictionary import BSTDictionary
 import time
 if __name__ == "__main__":
     # Create an instance of the AVL tree
-   tree = BST_Dictionary()
+   tree = BSTDictionary()
 
    # Insert some data into the tree
    tree.insert(2, 20)
