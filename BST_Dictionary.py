@@ -1,4 +1,4 @@
-from graphviz import Digraph
+#from graphviz import Digraph
 
 import os
 class Node:
@@ -71,9 +71,9 @@ class BSTDictionary:
         if not os.path.exists('trees'):
             os.makedirs('trees')
 
-        dot = Digraph(comment="AVL Tree")
-        _print_tree(self.root, dot)
-        dot.render(os.path.join('trees', fileName),view=True)
+       # dot = Digraph(comment="AVL Tree")
+       # _print_tree(self.root, dot)
+       # dot.render(os.path.join('trees', fileName),view=True)
     
     def keys(self):
         keys = []
