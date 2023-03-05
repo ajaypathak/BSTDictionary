@@ -42,53 +42,19 @@ class BSTDictionary:
         new_root.height = 1 + max(self.get_height(new_root.left), self.get_height(new_root.right))
         return new_root
 
-    def insert(self, key, data):
-        def _insert(node, key, data):
-            if key is None:
-
-                raise ValueError("Key cannot be none")
-            if node is None:
-                return Node(key, data)
-            
-            if key < node.key:
-                node.left = _insert(node.left, key, data)
-            elif key > node.key:
-                node.right = _insert(node.right, key, data)
-            else:
-                # key already exists, raise an exception
-                
-                txt = "Key {keyvalue} already exists in the Dictionary!"
-                raise KeyError(txt.format(keyvalue=key))
-                
-
-            node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
-            balance = self.get_balance(node)
-            if balance > 1 and key < node.left.key:
-                return self.rotate_right(node)
-            if balance < -1 and key > node.right.key:
-                return self.rotate_left(node)
-            if balance > 1 and key > node.left.key:
-                node.left = self.rotate_left(node.left)
-                return self.rotate_right(node)
-            if balance < -1 and key < node.right.key:
-                node.right = self.rotate_right(node.right)
-                return self.rotate_left(node)
-            return node
-
-        self.root = _insert(self.root, key, data)
-
     def search(self, key):
-        def _search(node, key):
-            if node is None:
-                return None
-            if key == node.key:
-                return node.data
-            elif key < node.key:
-                return _search(node.left, key)
-            else:
-                return _search(node.right, key)
+        return self._search(self.root, key)
 
-        return _search(self.root, key)
+    def _search(self, node, key):
+        if node is None:
+            raise KeyError("Key not found")
+
+        if key < node.key:
+            return self._search(node.left, key)
+        elif key > node.key:
+            return self._search(node.right, key)
+        else:
+            return node.data
 
     def print_tree(self,fileName):
         def _print_tree(node, dot):
@@ -136,3 +102,48 @@ class BSTDictionary:
 
         recursive_collect(self.root)
         return data
+    def __setitem__(self, key, value):
+        self.insert(key, value)
+    
+    def __getitem__(self, key):
+        return self._search(self.root, key)
+    
+    def insert(self, key, data):
+        if not isinstance(key, int) or key < 0:
+            raise ValueError("Key must be a positive integer")
+        if self.root is None:
+            self.root = Node(key, data)
+        else:
+            self.root = self._insert(key, data, self.root)
+
+    def _insert(self, key, data, node):
+        if node is None:
+            return Node(key, data)
+        
+        if key < node.key:
+            node.left = self._insert(key, data,node.left)
+        elif key > node.key:
+            node.right = self._insert(key, data,node.right)
+        else:
+            # key already exists, raise an exception
+            txt = "Key {keyvalue} already exists in the Dictionary!"
+            raise KeyError(txt.format(keyvalue=key))
+
+        node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
+        balance = self.get_balance(node)
+
+        if balance > 1 and key < node.left.key:
+            return self.rotate_right(node)
+
+        if balance < -1 and key > node.right.key:
+            return self.rotate_left(node)
+
+        if balance > 1 and key > node.left.key:
+            node.left = self.rotate_left(node.left)
+            return self.rotate_right(node)
+
+        if balance < -1 and key < node.right.key:
+            node.right = self.rotate_right(node.right)
+            return self.rotate_left(node)
+
+        return node

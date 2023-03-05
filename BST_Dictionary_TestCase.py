@@ -5,30 +5,37 @@ from  BST_Dictionary import BSTDictionary
 class BST_DictionaryTestCase(unittest.TestCase):
     def test_insert_single_key(self):
         avl = BSTDictionary()
-        avl.insert(10,20)
+        #avl.insert(10,20)
+        avl[10]=20
         self.assertEqual(avl.root.key, 10)
+        print(avl[10])
+        avl[23]="23 Value"
+        print(avl[23])
+        self.assertEqual(avl[23], "23 Value")
     
     def test_insert_empty_key(self):
         avl = BSTDictionary()
         with pytest.raises(ValueError):
-            avl.insert(None,23)
+            avl[None]="Value 1"
     
     def test_avl_tree_duplicate_key_insertion(self):
-        avl_tree = BSTDictionary()
-        avl_tree.insert(1, 'value1')
+        avl = BSTDictionary()
+        avl[1]="Value 1"
+        avl[11]="Value 11"
+        avl[12]="Value 12"
         with pytest.raises(KeyError):
-             avl_tree.insert(1, 'value2')
+             avl.insert(1, 'value2')
     
     def test_invalid_key(self):
         avl = BSTDictionary()
         with pytest.raises(ValueError):
-            avl.insert("abc", "value")
+            avl["abc"]="abcvalue"            
         with pytest.raises(ValueError):
-            avl.insert(0, "value")
+            avl[0]="0value"
         with pytest.raises(ValueError):
-            avl.insert(-1, "value")
+            avl[-1]="negative key"
         with pytest.raises(ValueError):
-            avl.insert("", "")
+            avl[""]="Empty key"
 
         
 
