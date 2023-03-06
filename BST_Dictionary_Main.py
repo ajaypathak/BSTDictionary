@@ -2,7 +2,7 @@ from BST_Dictionary import BSTDictionary
 import time
 if __name__ == "__main__":
     # Create an instance of the AVL tree
-   tree = BSTDictionary()
+   tree = BSTDictionary(False)
 
    # Insert some data into the tree
    #tree.insert(2, 20)
@@ -19,6 +19,7 @@ if __name__ == "__main__":
    tree[99]="abc"
    tree[32]=("a", 1, "b")
    tree[12]="xyz"
+   tree[2]="Overridden value"
 
 
    tree.print_tree("__setItem()__")

@@ -13,8 +13,9 @@ class Node:
         self.right = None
 
 class BSTDictionary:
-    def __init__(self):
+    def __init__(self,allow_duplicates=True):
         self.root = None
+        self.allow_duplicates=allow_duplicates
 
     def get_height(self, node):
         if node is None:
@@ -125,9 +126,16 @@ class BSTDictionary:
         elif key > node.key:
             node.right = self._insert(key, data,node.right)
         else:
-            # key already exists, raise an exception
-            txt = "Key {keyvalue} already exists in the Dictionary!"
-            raise KeyError(txt.format(keyvalue=key))
+            if(self.allow_duplicates==True):
+                node.data=data
+            else:
+                # key already exists, raise an exception
+                txt = "Key {keyvalue} already exists in the Dictionary!"
+                raise KeyError(txt.format(keyvalue=key))
+
+
+
+
 
         node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
         balance = self.get_balance(node)

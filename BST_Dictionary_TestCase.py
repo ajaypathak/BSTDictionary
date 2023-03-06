@@ -19,12 +19,22 @@ class BST_DictionaryTestCase(unittest.TestCase):
             avl[None]="Value 1"
     
     def test_avl_tree_duplicate_key_insertion(self):
-        avl = BSTDictionary()
+        avl = BSTDictionary(False)
         avl[1] = "Value 1"
         avl[11] = "Value 11"
         avl[12] = "Value 12"
         with self.assertRaises(KeyError):
              avl[1] = "Value 2"
+    
+
+    def test_avl_tree_allow_duplicate_key_insertion(self):
+        avl = BSTDictionary(True)
+        avl[1] = "Value 1"
+        avl[11] = "Value 11"
+        avl[12] = "Value 12"
+        avl[1] = "Value 2"
+        self.assertEqual(avl[1], "Value 2")
+
     
     def test_invalid_key(self):
         avl = BSTDictionary()
