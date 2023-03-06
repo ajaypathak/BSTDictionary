@@ -157,13 +157,15 @@ class RedBlackTree:
 
         # Get the height of the tree and the maximum width of each level
         tree_height = height(self.root)
-        level_widths = [max_width(self.root, i) for i in range(1, tree_height + 1)]
+        level_widths = [max_width(self.root, i)
+                        for i in range(1, tree_height + 1)]
 
         # Calculate the total width of the tree
         total_width = sum(level_widths) + len(level_widths) - 1
 
         # Initialize an empty matrix to hold the tree
-        tree_matrix = [[" " for _ in range(total_width)] for _ in range(tree_height)]
+        tree_matrix = [[" " for _ in range(total_width)]
+                       for _ in range(tree_height)]
 
         # Helper function to fill in the matrix with the values of the tree
         def fill_matrix(node, level, left, right):
@@ -174,7 +176,8 @@ class RedBlackTree:
                 tree_matrix[level][mid] = str(node.value)
 
                 if node.color == "red":
-                    tree_matrix[level][mid] = "\033[31m" + tree_matrix[level][mid] + "\033[0m"
+                    tree_matrix[level][mid] = "\033[31m" + \
+                        tree_matrix[level][mid] + "\033[0m"
 
                 if node.left is not None:
                     fill_matrix(node.left, level + 1, left, mid - 1)
@@ -189,6 +192,7 @@ class RedBlackTree:
         for row in tree_matrix:
             print(" ".join(row))
 
+
 if __name__ == "__main__":
     rb_tree = RedBlackTree()
 
@@ -202,8 +206,8 @@ if __name__ == "__main__":
     rb_tree.insert(12)
 
 # Print the inorder traversal of the tree to show the values in sorted order
-    #print("Inorder traversal of the Red-Black Tree: ")
-    #rb_tree.inorder_traversal(rb_tree.root)
+    # print("Inorder traversal of the Red-Black Tree: ")
+    # rb_tree.inorder_traversal(rb_tree.root)
     rb_tree.print_tree()
 
 
