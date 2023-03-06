@@ -58,34 +58,5 @@ class BST_DictionaryTestCase(unittest.TestCase):
             print("Key not found")       
 
 
-
-    # def test_insert_multiple_keys(self):
-    #     avl = AVLTree()
-    #     avl.insert(10)
-    #     avl.insert(20)
-    #     avl.insert(30)
-    #     self.assertEqual(avl.root.key, 20)
-    #     self.assertEqual(avl.root.left.key, 10)
-    #     self.assertEqual(avl.root.right.key, 30)
-
-    # def test_insert_duplicate_key(self):
-    #     avl = AVLTree()
-    #     avl.insert(10)
-    #     avl.insert(20)
-    #     avl.insert(10)
-    #     self.assertEqual(avl.root.key, 10)
-    #     self.assertEqual(len(avl.root.values), 2)
-
-    # def test_search_existing_key(self):
-    #     avl = AVLTree()
-    #     avl.insert(10)
-    #     avl.insert(20)
-    #     avl.insert(30)
-    #     node = avl.search(20)
-    #     self.assertIsNotNone(node)
-    #     self.assertEqual(node.key, 20)
-
-
-
 if __name__ == '__main__':
     unittest.main()
