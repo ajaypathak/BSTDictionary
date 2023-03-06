@@ -20,12 +20,3 @@ if __name__ == "__main__":
    tree[32]=("a", 1, "b")
    tree[12]="xyz"
    tree[2]="Overridden value"
-
-
-   tree.print_tree("__setItem()__")
-   timestr = time.strftime("%Y%m%d-%H%M%S")
-
-   print(tree.keys())
-   print(tree.values())
-
-   #tree.print_tree(timestr)
