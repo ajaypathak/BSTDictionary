@@ -1,22 +1,30 @@
 from BST_Dictionary import BSTDictionary
 import time
 if __name__ == "__main__":
-    # Create an instance of the AVL tree
-    tree = BSTDictionary(False)
+    # Create an instance of new BST dictionary
+    Dictionary = BSTDictionary()
 
-    # Insert some data into the tree
-    # tree.insert(2, 20)
-    # tree.insert(4, 21)
-    # tree.insert(1, "w2w")
-    # tree.insert(20, ["happy", "sad"])
-    # tree.insert(99, "abc")
-    # tree.insert(32, ("a", 1, "b"))
-    # tree.insert(12, "xyz")
-    tree[2] = 20
-    tree[4] = 21
-    tree[1] = "w2w"
-    tree[20] = ["happy", "sad"]
-    tree[99] = "abc"
-    tree[32] = ("a", 1, "b")
-    tree[12] = "xyz"
-    tree[2] = "Overridden value"
+    from pathlib import Path
+
+    path = Path(__file__).parent / "inputPS09.txt"
+    
+
+    # Open the input file and read the commands
+    with path.open() as f:
+        commands = f.readlines()
+    
+    #Iterate over commands and execute command
+    for command in commands:
+        command = command.strip()
+        if command.startswith("Dictionary.insert"):
+            exec(command)
+        elif command == "Dictionary.keys()":
+            print(Dictionary.keys())
+        elif command == "Dictionary.values()":
+            print(list(Dictionary.values()))
+        else:
+            try:
+                exec(command)
+            except:
+                pass
+
