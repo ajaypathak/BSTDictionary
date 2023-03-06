@@ -47,7 +47,15 @@ class BST_DictionaryTestCase(unittest.TestCase):
         with pytest.raises(ValueError):
             avl[""]="Empty key"
 
-        
+    def test_search_nonexistent_key(self):
+        avl = BSTDictionary(True)
+        avl[1] = "Value 1"
+        avl[11] = "Value 11"
+        avl[12] = "Value 12"
+
+        with pytest.raises(KeyError) as e:
+            node = avl.search(40)
+            print("Key not found")       
 
 
 
@@ -77,13 +85,7 @@ class BST_DictionaryTestCase(unittest.TestCase):
     #     self.assertIsNotNone(node)
     #     self.assertEqual(node.key, 20)
 
-    # def test_search_nonexistent_key(self):
-    #     avl = AVLTree()
-    #     avl.insert(10)
-    #     avl.insert(20)
-    #     avl.insert(30)
-    #     node = avl.search(40)
-    #     self.assertIsNone(node)
+
 
 if __name__ == '__main__':
     unittest.main()
