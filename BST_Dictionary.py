@@ -16,20 +16,25 @@ class Node:
 
 
 class BSTDictionary:
+    # The constructor method of BSTDictionary initializes the root node to None and allows duplicates by default. 
+    # The allow_duplicates parameter can be set to False to disallow nodes with duplicate keys
     def __init__(self, allow_duplicates=True):
         self.root = None
         self.allow_duplicates = allow_duplicates
 
+    # Returns the heigh of given node
     def get_height(self, node):
         if node is None:
             return 0
         return node.height
 
+    # Calculate the balance factor for a given node. Balance Factor=Height(Left Sub Tree)- Height(Right Sub Tree)
     def get_balance(self, node):
         if node is None:
             return 0
         return self.get_height(node.left) - self.get_height(node.right)
 
+    # Performs Left Rotation
     def rotate_left(self, node):
         new_root = node.right
         node.right = new_root.left
@@ -40,6 +45,7 @@ class BSTDictionary:
             max(self.get_height(new_root.left), self.get_height(new_root.right))
         return new_root
 
+    # Performs Right Rotation
     def rotate_right(self, node):
         new_root = node.left
         node.left = new_root.right
@@ -50,6 +56,7 @@ class BSTDictionary:
             max(self.get_height(new_root.left), self.get_height(new_root.right))
         return new_root
 
+    # Perform Search for a given key and return associated Node data. If key is not found,"KeyError" is raised
     def search(self, key):
         return self._search(self.root, key)
 
@@ -64,6 +71,9 @@ class BSTDictionary:
         else:
             return node.data
 
+    # Print graphical representaton of Tree. This method uses the Graphviz library to create a visualization of the tree in the form of PDF File. 
+    # Left Edges are represented in red color. Right Edges are reprented in Green Color.
+    # All generated files are created in Tree folder. If output file is already present, it will delete the old file and create the new file.
     def print_tree(self, fileName):
         def _print_tree(node, dot):
             if node:
@@ -80,10 +90,20 @@ class BSTDictionary:
         if not os.path.exists('trees'):
             os.makedirs('trees')
 
+        outputFilePath=os.path.join('trees', fileName)
+        try:
+            if os.path.exists(outputFilePath):
+                os.remove(outputFilePath)
+        except:
+            print("Error while deleting file ", outputFilePath)
+
+
+
        # dot = Digraph(comment="AVL Tree")
        # _print_tree(self.root, dot)
-       # dot.render(os.path.join('trees', fileName),view=True)
+       # dot.render(outputFilePath,view=True)
 
+    # Returns list of keys
     def keys(self):
         keys = []
 
@@ -98,6 +118,7 @@ class BSTDictionary:
         recursive_collect(self.root)
         return keys
 
+    # Returns List of Values
     def values(self):
         data = []
 
@@ -112,12 +133,15 @@ class BSTDictionary:
         recursive_collect(self.root)
         return data
 
+    # Sets the value in Dictionary for a Given Key
     def __setitem__(self, key, value):
         self.insert(key, value)
 
+    # Returns the value for a given key, otherwise raises KeyError
     def __getitem__(self, key):
         return self._search(self.root, key)
 
+    # Utility Method for inserting Key into Dictionary
     def insert(self, key, data):
         if not isinstance(key, int) or key < 0:
             raise ValueError("Key must be a positive integer")
