@@ -1,4 +1,4 @@
-# from graphviz import Digraph
+#from graphviz import Digraph
 
 import os
 
@@ -16,7 +16,7 @@ class Node:
 
 
 class BSTDictionary:
-    # The constructor method of BSTDictionary initializes the root node to None and allows duplicates by default. 
+    # The constructor method of BSTDictionary initializes the root node to None and allows duplicates by default.
     # The allow_duplicates parameter can be set to False to disallow nodes with duplicate keys
     def __init__(self, allow_duplicates=True):
         self.root = None
@@ -71,7 +71,7 @@ class BSTDictionary:
         else:
             return node.data
 
-    # Print graphical representaton of Tree. This method uses the Graphviz library to create a visualization of the tree in the form of PDF File. 
+    # Print graphical representaton of Tree. This method uses the Graphviz library to create a visualization of the tree in the form of PDF File.
     # Left Edges are represented in red color. Right Edges are reprented in Green Color.
     # All generated files are created in Tree folder. If output file is already present, it will delete the old file and create the new file.
     def print_tree(self, fileName):
@@ -90,18 +90,16 @@ class BSTDictionary:
         if not os.path.exists('trees'):
             os.makedirs('trees')
 
-        outputFilePath=os.path.join('trees', fileName)
+        outputFilePath = os.path.join('trees', fileName)
         try:
             if os.path.exists(outputFilePath):
                 os.remove(outputFilePath)
         except:
             print("Error while deleting file ", outputFilePath)
 
-
-
-       # dot = Digraph(comment="AVL Tree")
-       # _print_tree(self.root, dot)
-       # dot.render(outputFilePath,view=True)
+        #dot = Digraph(comment="AVL Tree")
+        #_print_tree(self.root, dot)
+        #dot.render(outputFilePath, view=False)
 
     # Returns list of keys
     def keys(self):
@@ -151,6 +149,8 @@ class BSTDictionary:
             self.root = self._insert(key, data, self.root)
 
     def _insert(self, key, data, node):
+
+        # Step 1: Perform insert operation like standard BST
         if node is None:
             return Node(key, data)
 
@@ -166,20 +166,61 @@ class BSTDictionary:
                 txt = "Key {keyvalue} already exists in the Dictionary!"
                 raise KeyError(txt.format(keyvalue=key))
 
+        # Step 2 : Calculate the height of the node
         node.height = 1 + max(self.get_height(node.left),
                               self.get_height(node.right))
+        # Step 3 : Cancluatet he balance Factor
         balance = self.get_balance(node)
+
+        # Step 4 Now check if node is not balanced.
+        # T1, T2, T3 and T4 sub tree.
+
+        # Case 1 : Left Left , Perform Right Rotation.
+        #                                                     
+        #                                                      a                                      b 
+        #                                                     / \                                   /   \
+        #                                                    b   T4      Right Rotate (c)          a      c
+        #                                                   / \          - - - - - - - - ->      /  \    /  \ 
+        #                                                  c   T3                               T1  T2  T3  T4
+        #                                                 / \
+        #                                               T1   T2
 
         if balance > 1 and key < node.left.key:
             return self.rotate_right(node)
-
+        
+        # Case 2 : Right Right Case. Perform Left Rotation
+        #                                                      c                                b
+        #                                                     /  \                            /   \ 
+        #                                                    T1   b     Left Rotate(c)       c      a
+        #                                                   /  \   - - - - - - - ->         / \    / \
+        #                                                  T2   a                          T1  T2 T3  T4
+        #                                                 / \
+        #                                               T3  T4
         if balance < -1 and key > node.right.key:
             return self.rotate_left(node)
 
+        # Case 3 : Left Right, Perform double rotation
+        #         c                               c                           a
+        #        / \                            /   \                        /  \ 
+        #       b   T4  Left Rotate (b)        a    T4  Right Rotate(c)    b      c
+        #      / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / \
+        #    T1   a                          b    T3                    T1  T2 T3  T4
+        #        / \                        / \
+        #      T2   T3                    T1   T2        
+        
         if balance > 1 and key > node.left.key:
             node.left = self.rotate_left(node.left)
             return self.rotate_right(node)
 
+        # Case 4 : Right Left. Perform double rotation
+        #     c                            c                            a
+        #    / \                          / \                          /  \ 
+        #  T1   b   Right Rotate (b)    T1   a      Left Rotate(c)   c      b
+        #      / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \    / \
+        #     a   T4                      T2   b                  T1  T2  T3  T4
+        #    / \                              /  \
+        #  T2   T3                           T3   T4
+        #        
         if balance < -1 and key < node.right.key:
             node.right = self.rotate_right(node.right)
             return self.rotate_left(node)

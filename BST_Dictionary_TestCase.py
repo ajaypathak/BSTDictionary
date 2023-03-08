@@ -55,6 +55,12 @@ class BST_DictionaryTestCase(unittest.TestCase):
         with pytest.raises(KeyError) as e:
             node = avl.search(40)
             print("Key not found")
+    
+    
+
+
+
+
 
 
 if __name__ == '__main__':
