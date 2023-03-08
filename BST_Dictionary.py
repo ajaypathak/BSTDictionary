@@ -90,7 +90,8 @@ class BSTDictionary:
         if not os.path.exists('trees'):
             os.makedirs('trees')
 
-        outputFilePath = os.path.join('trees', fileName)
+        path=os.path.realpath(os.path.dirname(__file__))
+        outputFilePath = os.path.join(path,"Trees", fileName)
         try:
             if os.path.exists(outputFilePath):
                 os.remove(outputFilePath)
