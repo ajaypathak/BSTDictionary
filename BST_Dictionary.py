@@ -1,4 +1,4 @@
-#from graphviz import Digraph
+from graphviz import Digraph
 
 import os
 
@@ -98,9 +98,9 @@ class BSTDictionary:
         except:
             print("Error while deleting file ", outputFilePath)
 
-        #dot = Digraph(comment="AVL Tree")
-        #_print_tree(self.root, dot)
-        #dot.render(outputFilePath, view=False)
+        dot = Digraph(comment="AVL Tree")
+        _print_tree(self.root, dot)
+        dot.render(outputFilePath, view=False)
 
     # Returns list of keys
     def keys(self):
@@ -140,6 +140,68 @@ class BSTDictionary:
     def __getitem__(self, key):
         return self._search(self.root, key)
 
+    def delete(self,key):
+        
+        if not self.root:
+            return self.root
+        self._delete(key,self.root)
+        
+    def _delete(self,key,node):
+        if node is None:
+            return 
+        if key<node.key:
+            node.left=self._delete(key,node.left)
+        elif key>node.key:
+            node.right=self._delete(key,node.right)    
+        else:
+            if node.left is None:
+                temp=node.right
+                node=None
+                return temp
+            elif node.right is None:
+                temp=node.left
+                node=None
+                return temp
+            
+            temp=self.getMinValueNode(node.right)
+            node.data=temp.data
+            node.key=temp.key
+            node.right=self._delete(temp.key,node.right)
+        if node is None:
+            return node
+        
+        node.height=1+max(self.get_height(node.left),self.get_height(node.right))
+        balance=self.get_balance(node)
+        # Step 4 Now check if node is not balanced.
+
+        if balance > 1 and key < self.get_balance(node.left)>=0:
+            return self.rotate_right(node)
+        
+
+        if balance < -1 and self.get_balance(node.right) <= 0:
+            return self.rotate_left(node)
+
+
+        if balance > 1 and self.get_balance(node.left) < 0:
+            node.left = self.rotate_left(node.left)
+            return self.rotate_right(node)
+
+    
+        if balance < -1 and self.get_balance(node.right) > 0:
+            node.right = self.rotate_right(node.right)
+            return self.rotate_left(node)
+
+        return node        
+
+
+
+
+
+    def getMinValueNode(self, node):
+        if node is None or node.left is None:
+            return node
+        return self.getMinValueNode(node.left)
+    
     # Utility Method for inserting Key into Dictionary
     def insert(self, key, data):
         if not isinstance(key, int) or key < 0:
@@ -235,3 +297,4 @@ class BSTDictionary:
             return True
         except KeyError as ke:
             return False
+

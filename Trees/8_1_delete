@@ -1,0 +1,6 @@
+// AVL Tree
+digraph {
+	12 [label="12: 12"]
+	12 -> 2 [fillcolor=red style=outline]
+	2 [label="2: 2"]
+}

@@ -1,0 +1,4 @@
+// AVL Tree
+digraph {
+	12 [label="12: 12"]
+}
