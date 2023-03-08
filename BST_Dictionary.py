@@ -226,3 +226,11 @@ class BSTDictionary:
             return self.rotate_left(node)
 
         return node
+
+    # Returns True in case key is present otherwise false.
+    def containsKey(self,key):
+        try:
+            self._search(self.root, key)
+            return True
+        except KeyError as ke:
+            return False

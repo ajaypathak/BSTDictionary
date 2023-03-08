@@ -52,6 +52,12 @@ class BST_DictionaryTestCase(unittest.TestCase):
         avl[11] = "Value 11"
         avl[12] = "Value 12"
 
+        keyPresent=avl.containsKey(100)
+        self.assertEqual(False,keyPresent)
+
+        keyPresent=avl.containsKey(1)
+        self.assertEqual(True,keyPresent)
+
         with pytest.raises(KeyError) as e:
             node = avl.search(40)
             print("Key not found")
