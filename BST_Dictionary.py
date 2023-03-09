@@ -134,7 +134,7 @@ class BSTDictionary:
 
     # Sets the value in Dictionary for a Given Key
     def __setitem__(self, key, value):
-        self.insert(key, value)
+        self.addValue(key, value)
 
     # Returns the value for a given key, otherwise raises KeyError
     def __getitem__(self, key):
@@ -203,7 +203,7 @@ class BSTDictionary:
         return self.getMinValueNode(node.left)
     
     # Utility Method for inserting Key into Dictionary
-    def insert(self, key, data):
+    def addValue(self, key, data):
         if not isinstance(key, int) or key < 0:
             raise ValueError("Key must be a positive integer")
         if self.root is None:

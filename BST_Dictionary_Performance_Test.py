@@ -13,7 +13,7 @@ start_time = timeit.default_timer()
 for i in range(total_Elements):
     key = random.randint(1, 1000000)
     value = f"value {i}"
-    avl.insert(key, value)
+    avl.addValue(key, value)
 end_time = timeit.default_timer()
 total_time += (end_time - start_time)*1000
 
