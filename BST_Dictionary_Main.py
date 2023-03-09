@@ -3,6 +3,9 @@ from pathlib import Path
 import time
 import sys
 
+def addValue(Dictionary, key, value):
+    Dictionary.addValue(key, value)
+
 if __name__ == "__main__":
 
     # Create an instance of new BST dictionary
@@ -22,21 +25,28 @@ if __name__ == "__main__":
     # Iterate over commands and execute command
     for command in commands:
         command = command.strip()
-        if command.startswith("Dictionary.insert"):
-            exec(command)
-            # Dictionary.print_tree(str(counter))
-            # counter=counter+1
+        if command.startswith("addValue"):
+            try:
+                exec(command)
+            except:
+                print("Invalid addValue command : ", command, ". No action", file=output_file )
         elif command == "Dictionary.keys()":
             print(str(Dictionary.keys()), file=output_file)
         elif command == "Dictionary.values()":
             print(str(Dictionary.values()), file=output_file)
-        else:
+        elif command.startswith("Dictionary["): # overload index-operator ([])
             try:
-                key = int(command.split('[')[1].removesuffix(']'))
-                print(str(Dictionary[key]), file=output_file)
+                if command.__contains__("="): # set dictionary value
+                    exec(command)
+                else: 
+                    key = int(command.split('[')[1].removesuffix(']'))
+                    print(str(Dictionary[key]), file=output_file)
             except:
-                pass
+                print("Invalid usage of operator([]) command : ", "command", ". No action", file=output_file )
+        else:
+            print("Invalid command : ", command, ". No action", file=output_file )
 
 
-def addValue(dictionary: BSTDictionary, key, data):
-    dictionary.addValue(key, data)
+
+
+
