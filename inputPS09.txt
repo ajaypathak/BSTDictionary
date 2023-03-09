@@ -7,5 +7,5 @@ Dictionary.insert(32,("a", 1, "b"))
 Dictionary.insert(12,"xyz")
 Dictionary.keys()
 Dictionary.values()
-print(Dictionary[2])
-print(Dictionary[1])
+Dictionary[2]
+Dictionary[1]
