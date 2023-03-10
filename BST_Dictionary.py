@@ -140,6 +140,7 @@ class BSTDictionary:
     def __getitem__(self, key):
         return self._search(self.root, key)
 
+    # Deletes the node from dictionary for given key otherwise ignore the key
     def delete(self,key):
         
         if not self.root:
