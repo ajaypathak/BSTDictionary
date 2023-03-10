@@ -4,7 +4,7 @@ addValue(Dictionary,20,["happy", "sad"])
 addValue(Dictionary,99,"abc")
 addValue(Dictionary,32,("a", 1, "b"))
 addValue(Dictionary,12,"xyz")
-addValue(Dictionary,-12,"xyz")
+addValue(Dictionary,12,"xyz")
 addValue(Dictionary,"TextKey","xyz")
 Dictionary[1] = "w2w"
 Dictionary[32] = ("x", "y", "z", 500)
