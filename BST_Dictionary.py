@@ -1,4 +1,4 @@
-from graphviz import Digraph
+#from graphviz import Digraph
 
 import os
 
@@ -99,9 +99,9 @@ class BSTDictionary:
         except:
             print("Error while deleting file ", outputFilePath)
 
-        dot = Digraph(comment="AVL Tree")
-        _print_tree(self.root, dot)
-        dot.render(outputFilePath, view=False)
+        #dot = Digraph(comment="AVL Tree")
+        #_print_tree(self.root, dot)
+        #dot.render(outputFilePath, view=False)
 
     # Returns list of keys
     def keys(self):

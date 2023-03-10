@@ -75,7 +75,18 @@ class BST_DictionaryTestCase(unittest.TestCase):
             avl7.delete(num)
             avl7.print_tree(str(i) + "_"+ str(num)+"_delete")
             i=i+1
-
+    # def test_printDictionary(self):
+    #     list=[64, 1, 14, 26, 13, 110, 98, 85]
+    #     numberlist=[]
+    #     bst = BSTDictionary(True)
+    #     for num in list:
+    #         key=num
+    #         numberlist.append(key)
+            
+    #         value=num
+    #         bst[key]=value
+            
+    #     bst.print_tree("input4")
     
 
 

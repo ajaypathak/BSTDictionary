@@ -1,0 +1,18 @@
+// AVL Tree
+digraph {
+	19 [label="19: Value19"]
+	19 -> 9 [fillcolor=red style=outline]
+	19 -> 63 [fillcolor=green style=outline]
+	9 [label="9: Value9"]
+	9 -> 18 [fillcolor=green style=outline]
+	18 [label="18: Value18"]
+	63 [label="63: Value63"]
+	63 -> 27 [fillcolor=red style=outline]
+	63 -> 99 [fillcolor=green style=outline]
+	27 [label="27: Value27"]
+	99 [label="99: Value99"]
+	99 -> 81 [fillcolor=red style=outline]
+	99 -> 108 [fillcolor=green style=outline]
+	81 [label="81: Value81"]
+	108 [label="108: Value108"]
+}

@@ -1,0 +1,16 @@
+// AVL Tree
+digraph {
+	12 [label="12: Value12"]
+	12 -> 2 [fillcolor=red style=outline]
+	12 -> 32 [fillcolor=green style=outline]
+	2 [label="2: Value2"]
+	2 -> 1 [fillcolor=red style=outline]
+	2 -> 4 [fillcolor=green style=outline]
+	1 [label="1: Value1"]
+	4 [label="4: Value4"]
+	32 [label="32: Value32"]
+	32 -> 20 [fillcolor=red style=outline]
+	32 -> 99 [fillcolor=green style=outline]
+	20 [label="20: Value20"]
+	99 [label="99: Value99"]
+}
