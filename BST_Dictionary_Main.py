@@ -2,6 +2,7 @@ from BST_Dictionary import BSTDictionary
 from pathlib import Path
 import time
 import sys
+import os
 
 def addValue(Dictionary, key, value):
     Dictionary.addValue(key, value)
@@ -14,13 +15,20 @@ if __name__ == "__main__":
     path = Path(__file__).parent / "inputPS09.txt"
     counter = 1
 
+    outputPath = Path(__file__).parent / "outputPS09.txt"
+    output_file = open(outputPath, 'w+')
+    newlinestr = "\r\n"
+    
+    #Check if input file is present. if it not present than exit the program
+    if (os.path.exists(path)==False):
+        print("Input file does not present. Exiting the program", file=output_file)
+        sys.exit(0)
+    
     # Open the input file and read the commands
     with path.open() as f:
         commands = f.readlines()
 
-    outputPath = Path(__file__).parent / "outputPS09.txt"
-    output_file = open(outputPath, 'w+')
-    newlinestr = "\r\n"
+
 
     # Iterate over commands and execute command
     for command in commands:
