@@ -62,7 +62,8 @@ class BSTDictionary:
 
     def _search(self, node, key):
         if node is None:
-            raise KeyError("Key not found")
+            txt = "Key {keyvalue} not found"
+            raise KeyError(txt.format(keyvalue=key))
 
         if key < node.key:
             return self._search(node.left, key)
@@ -206,7 +207,8 @@ class BSTDictionary:
     # Utility Method for inserting Key into Dictionary
     def addValue(self, key, data):
         if not isinstance(key, int) or key < 0:
-            raise ValueError("Key must be a positive integer")
+            txt = "Key {keyvalue} must be a positive integer greater than 0"
+            raise ValueError(txt.format(keyvalue=key))
         if self.root is None:
             self.root = Node(key, data)
         else:

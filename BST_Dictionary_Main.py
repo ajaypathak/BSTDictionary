@@ -28,8 +28,8 @@ if __name__ == "__main__":
         if command.startswith("addValue"):
             try:
                 exec(command)
-            except:
-                print("Invalid addValue command : ", command, ". No action", file=output_file )
+            except Exception as e:
+                print(str(e)+" Invalid addValue command : ", command, ". No action", file=output_file )
         elif command == "Dictionary.keys()":
             print(str(Dictionary.keys()), file=output_file)
         elif command == "Dictionary.values()":
@@ -41,8 +41,8 @@ if __name__ == "__main__":
                 else: 
                     key = int(command.split('[')[1].removesuffix(']'))
                     print(str(Dictionary[key]), file=output_file)
-            except:
-                print("Invalid usage of operator([]) command : ", "command", ". No action", file=output_file )
+            except Exception as e:
+                print(str(e)+ " Invalid usage of operator([]) command : ", "command", ". No action", file=output_file )
         else:
             print("Invalid command : ", command, ". No action", file=output_file )
 
